@@ -1,18 +1,53 @@
-def read():
-    with open("books/frankenstein.txt") as f:
-        file_contents = f.read()
-        print(file_contents)
-
-def count():
-    count_base = []
-    with open("books/frankenstein.txt") as f:
-        file_contents = f.read()
-        count_base = file_contents.split()
-        word_count = len(count_base)
-        print(word_count)
-
 def main():
-    read()
-    count()
-
+    book_path = "books/frankenstein.txt"
+    file_contents = get_book_text(book_path)
+    word_count = get_num_words(file_contents)
+    file_con_low = lowercase(file_contents)
+    character_count = get_char_count(file_con_low)
+    print(f"--- Commencing report of {book_path} ---")
+    print(f"{word_count} words located within in the document.")
+    for character in character_count:
+        counter = character_count[character]
+        print(f"The letter '{character}' was found {counter} times.")
+# I believe you're meant to have main up at the top
+# Here, main starts everything and makes the next few lines simpler
+def get_num_words(file_contents):
+    count_base = file_contents.split()
+    return len(count_base)
+# gnw takes the file contents and splits it into a list, before returning the list len
+def get_book_text(book_path):
+    with open(book_path) as f:
+        return f.read()
+# gbt acts as our "with open" section quite nicely
+# This way we don't have to write it every time
+def lowercase(file_contents):
+    file_con_lower = file_contents.lower()
+    file_con_low = file_con_lower.filter()
+    return file_con_low
+# Just a short section to convert to lowercase for the char count later
+def get_char_count(file_con_low):
+    characters = {
+        'a':0,
+        'b':0,
+        'c':0,
+        'd':0,
+        'e':0,
+        'f':0,
+        'g':0,
+        'h':0,
+        'i':0,
+        'j':0,
+        'k':0,
+        'l':0
+    }
+    split_up = list(file_con_low)
+    for split in split_up:
+        if split not in characters:
+            characters.update({split:1})
+        else:
+            characters[split] += 1
+    return characters
+# This was very finicky but basically adds a character if it doesn't appear yet
+# and just adds one value if the character alread exists'
+# remember to call main at the end.
 main()
