@@ -21,31 +21,19 @@ def get_book_text(book_path):
 # gbt acts as our "with open" section quite nicely
 # This way we don't have to write it every time
 def lowercase(file_contents):
-    file_con_lower = file_contents.lower()
-    file_con_low = file_con_lower.filter()
+    file_con_low = file_contents.lower()
     return file_con_low
 # Just a short section to convert to lowercase for the char count later
 def get_char_count(file_con_low):
-    characters = {
-        'a':0,
-        'b':0,
-        'c':0,
-        'd':0,
-        'e':0,
-        'f':0,
-        'g':0,
-        'h':0,
-        'i':0,
-        'j':0,
-        'k':0,
-        'l':0
-    }
+    characters = {}
     split_up = list(file_con_low)
     for split in split_up:
-        if split not in characters:
-            characters.update({split:1})
-        else:
-            characters[split] += 1
+        if split.isalpha():
+            if split not in characters:
+                characters.update({split:1})
+            else:
+                characters[split] += 1
+
     return characters
 # This was very finicky but basically adds a character if it doesn't appear yet
 # and just adds one value if the character alread exists'
