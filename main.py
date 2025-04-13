@@ -1,14 +1,17 @@
-def main():
-    book_path = "books/frankenstein.txt"
+import sys
+def main(book):
+    book_path = sys.argv[1]
     file_contents = get_book_text(book_path)
     word_count = get_num_words(file_contents)
     file_con_low = lowercase(file_contents)
     character_count = get_char_count(file_con_low)
     print(f"--- Commencing report of {book_path} ---")
+    print(f"–.-.-.-")
     print(f"{word_count} words located within in the document.")
+    print("–.-.-.-")
     for character in character_count:
         counter = character_count[character]
-        print(f"The letter '{character}' was found {counter} times.")
+        print(f"The letter '{character}' appears {counter} times.")
 # I believe you're meant to have main up at the top
 # Here, main starts everything and makes the next few lines simpler
 def get_num_words(file_contents):
@@ -38,4 +41,14 @@ def get_char_count(file_con_low):
 # This was very finicky but basically adds a character if it doesn't appear yet
 # and just adds one value if the character alread exists'
 # remember to call main at the end.
-main()
+
+if len(sys.argv) != 2:
+    print("Usage: python3 main.py <path_to_book>")
+    sys.exit(1)
+else:
+    book = sys.argv[1]
+    main(book)
+# Currently trying to add the capability to put in any book and get
+# a word count etc from it.
+# Basically if you follow the right syntax of entry, you'll be able to
+# scan any book out there (in txt form)
